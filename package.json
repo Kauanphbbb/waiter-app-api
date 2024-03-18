@@ -1,0 +1,15 @@
+{
+  "name": "waiter-app-api",
+  "version": "1.0.0",
+  "description": "API para o waiter app, aplicativo para garçons",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.4.2"
+  }
+}
