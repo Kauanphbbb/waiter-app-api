@@ -1,13 +1,20 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import http from 'node:http';
 import path from 'node:path';
+import { Server } from 'socket.io';
 import { router } from './router';
+
+const app = express();
+const server = http.createServer(app);
+export const io = new Server(server);
 
 mongoose
   .connect('mongodb://localhost:27017')
   .then(() => {
-    const app = express();
     const port = 3001;
+
+    io.on('connect', () => console.log('connected'));
 
     app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -30,6 +37,6 @@ mongoose
 
     app.use(router);
 
-    app.listen(port, () => console.log(`🚀 Running on port ${port}`));
+    server.listen(port, () => console.log(`🚀 Running on port ${port}`));
   })
   .catch(() => console.log('Error connecting to MongoDB'));
